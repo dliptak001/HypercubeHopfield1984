@@ -77,6 +77,14 @@ struct HopfieldConfig
 /// place) until the object is destroyed or moved from, and the next Latch
 /// overwrites the cube. A language binding should copy them out rather than
 /// expose a view. A moved-from Hopfield may only be assigned to or destroyed.
+///
+/// Tuning. eta is the training rate and gain the attractor strength, and
+/// they are independent: lower eta for slower training, lower gain for
+/// shallower basins (gain * degree of order 1 is the example's point; well
+/// below that an exposure can escape a stored pattern). gain * input_gain
+/// sets how much of the exposure passes through, so when gain drops, raise
+/// input_gain in proportion to keep it. distance and dim set capacity, not
+/// strength. examples/recall_benchmark.cpp measures any point.
 class Hopfield
 {
 public:
